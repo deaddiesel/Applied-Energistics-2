@@ -30,7 +30,11 @@ base {
     archivesName = "appliedenergistics2"
 }
 
-neoForge.version = project.neoforge_version
+neoForge.enable {
+    version = project.neoforge_version
+    // Disable recompilation if the "CI" environment variable is set to true. It is automatically set by GitHub Actions.
+    disableRecompilation = System.getenv("CI") == "true"
+}
 
 sourceSets {
     main {
