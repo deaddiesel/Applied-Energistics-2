@@ -23,7 +23,6 @@ import java.util.function.Function;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
-import net.minecraft.util.LightCoordsUtil;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.client.Minecraft;
@@ -40,6 +39,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.QuadCollection;
 import net.minecraft.core.Direction;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.RenderTypeHelper;

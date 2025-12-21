@@ -23,8 +23,6 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiFunction;
 
-import appeng.datagen.providers.tags.VillagerTradeTagsProvider;
-import appeng.init.InitVillager;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -56,6 +54,8 @@ import appeng.datagen.providers.tags.DataComponentTypeTagProvider;
 import appeng.datagen.providers.tags.FluidTagsProvider;
 import appeng.datagen.providers.tags.ItemTagsProvider;
 import appeng.datagen.providers.tags.PoiTypeTagsProvider;
+import appeng.datagen.providers.tags.VillagerTradeTagsProvider;
+import appeng.init.InitVillager;
 import appeng.init.worldgen.InitBiomes;
 import appeng.init.worldgen.InitDimensionTypes;
 import appeng.init.worldgen.InitStructures;

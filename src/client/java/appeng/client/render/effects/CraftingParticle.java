@@ -18,7 +18,6 @@
 
 package appeng.client.render.effects;
 
-import net.minecraft.util.LightCoordsUtil;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.client.Camera;
@@ -34,6 +33,7 @@ import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.util.ARGB;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemDisplayContext;

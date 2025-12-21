@@ -21,7 +21,6 @@ package appeng.core;
 import java.util.Collection;
 import java.util.Collections;
 
-import net.minecraft.world.item.trading.TradeSets;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
