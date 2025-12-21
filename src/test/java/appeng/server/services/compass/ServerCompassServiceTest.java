@@ -16,7 +16,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.datafix.DataFixers;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.DimensionDataStorage;
 import net.neoforged.testframework.junit.EphemeralTestServerProvider;
 
@@ -39,7 +38,7 @@ class ServerCompassServiceTest {
         var cp2 = new ChunkPos(-1023, 0);
 
         var dimensionalDataStorage = new DimensionDataStorage(
-                new SavedData.Context(level, 0L),
+                level,
                 tempDir,
                 DataFixers.getDataFixer(),
                 server.registryAccess());

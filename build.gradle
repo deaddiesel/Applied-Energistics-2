@@ -130,7 +130,7 @@ dependencies {
     testImplementation("org.junit.platform:junit-platform-launcher")
     testImplementation("org.assertj:assertj-core")
     testImplementation("com.google.guava:guava-testlib:21.0")
-    testImplementation("org.mockito:mockito-junit-jupiter:5.12.0")
+    testImplementation("org.mockito:mockito-junit-jupiter:${project.mockito_version}")
     testImplementation("net.neoforged:testframework:${project.neoforge_version}")
 }
 

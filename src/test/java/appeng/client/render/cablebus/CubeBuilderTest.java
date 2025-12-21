@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import org.joml.Vector3fc;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.Mockito;
@@ -45,28 +45,35 @@ class CubeBuilderTest {
             var quad = output.get(0);
             assertEquals(side, quad.direction());
 
-            var fb = new FaceBakery();
-            var rewinded = quad.vertices().clone();
-            fb.recalculateWinding(rewinded, side);
+            var positions = new Vector3fc[] {
+                    quad.position0(),
+                    quad.position1(),
+                    quad.position2(),
+                    quad.position3()
+            };
+            var uvs = new long[] {
+                    quad.packedUV0(),
+                    quad.packedUV1(),
+                    quad.packedUV2(),
+                    quad.packedUV3()
+            };
+            var originalPositions = positions.clone();
 
-            assertThat(getVertexOrder(rewinded, quad.vertices()))
+            FaceBakery.recalculateWinding(positions, uvs, side);
+
+            assertThat(getVertexOrder(originalPositions, positions))
                     .containsExactly(0, 1, 2, 3);
         }
     }
 
     // Get the order of vertices compared to the original array
-    private int[] getVertexOrder(int[] originalData, int[] data) {
-        var vertexInts = FaceBakery.VERTEX_INT_SIZE;
-        var orgVertexCount = originalData.length / vertexInts;
-        var vertexCount = data.length / vertexInts;
-        int[] result = new int[vertexCount];
+    private int[] getVertexOrder(Vector3fc[] originalPositions, Vector3fc[] positions) {
+        int[] result = new int[originalPositions.length];
 
-        for (var i = 0; i < vertexCount; i++) {
+        for (var i = 0; i < originalPositions.length; i++) {
             result[i] = -1;
-            for (int j = 0; j < orgVertexCount; j++) {
-                if (Arrays.equals(
-                        data, i * vertexInts, (i + 1) * vertexInts,
-                        originalData, j * vertexInts, (j + 1) * vertexInts)) {
+            for (int j = 0; j < originalPositions.length; j++) {
+                if (originalPositions[i].equals(positions[j])) {
                     result[i] = j;
                     break;
                 }
