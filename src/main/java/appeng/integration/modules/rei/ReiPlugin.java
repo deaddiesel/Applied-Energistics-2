@@ -18,7 +18,7 @@
 
 package appeng.integration.modules.rei;
 
-import me.shedaniel.rei.api.common.plugins.REIServerPlugin;
+import me.shedaniel.rei.api.common.plugins.REICommonPlugin;
 import me.shedaniel.rei.forge.REIPluginCommon;
 
 import appeng.api.integrations.rei.IngredientConverters;
@@ -26,7 +26,7 @@ import appeng.integration.abstraction.ItemListMod;
 import appeng.integration.modules.itemlists.CompatLayerHelper;
 
 @REIPluginCommon
-public class ReiPlugin implements REIServerPlugin {
+public class ReiPlugin implements REICommonPlugin {
     public ReiPlugin() {
         if (CompatLayerHelper.IS_LOADED) {
             return;
