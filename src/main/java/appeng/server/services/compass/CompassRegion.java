@@ -45,7 +45,7 @@ final class CompassRegion extends SavedData {
 
     private static final Codec<Section> SECTION_CODEC = RecordCodecBuilder.create(builder -> builder.group(
             Codec.INT.fieldOf("index").forGetter(Section::index),
-            ExtraCodecs.BIT_SET.fieldOf("index").forGetter(Section::bits)).apply(builder, Section::new));
+            ExtraCodecs.BIT_SET.fieldOf("bits").forGetter(Section::bits)).apply(builder, Section::new));
 
     private List<Section> sections() {
         return sections.entrySet().stream().map(

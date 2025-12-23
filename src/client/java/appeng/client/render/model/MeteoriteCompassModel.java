@@ -42,6 +42,7 @@ import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -59,8 +60,7 @@ import appeng.hooks.CompassManager;
  */
 public class MeteoriteCompassModel implements ItemModel {
 
-    private static final Identifier MODEL_POINTER = Identifier.parse(
-            "ae2:item/meteorite_compass_pointer");
+    private static final Identifier MODEL_POINTER = AppEng.makeId("item/meteorite_compass_pointer");
 
     private final ItemBaseModelWrapper pointer;
 
@@ -76,7 +76,8 @@ public class MeteoriteCompassModel implements ItemModel {
             ItemDisplayContext displayContext, @Nullable ClientLevel level, @Nullable ItemOwner owner, int seed) {
         Float target = null;
         if (level != null && owner != null) {
-            var lookVector = new Vec3(1, 0, 0).yRot(owner.getVisualRotationYInDegrees());
+            float ownerRotation = owner.getVisualRotationYInDegrees();
+            var lookVector = Vec3.Z_AXIS.yRot(-Mth.DEG_TO_RAD * ownerRotation);
             target = getAnimatedRotation(owner.position(), lookVector);
         }
 
