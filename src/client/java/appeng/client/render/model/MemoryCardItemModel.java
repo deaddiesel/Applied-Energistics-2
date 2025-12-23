@@ -117,7 +117,7 @@ public class MemoryCardItemModel implements ItemModel {
         public MemoryCardItemModel bake(BakingContext context) {
 
             ModelDebugName debugName = getClass()::toString;
-            var colorOverlayMaterial = new Material(TextureAtlas.LOCATION_BLOCKS, colorOverlaySprite);
+            var colorOverlayMaterial = new Material(TextureAtlas.LOCATION_ITEMS, colorOverlaySprite);
             var hashSprite = context.blockModelBaker().sprites().get(colorOverlayMaterial, debugName);
 
             var baseModel = ItemBaseModelWrapper.bake(context.blockModelBaker(), this.baseModel);

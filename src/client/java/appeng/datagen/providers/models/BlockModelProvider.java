@@ -641,5 +641,8 @@ public class BlockModelProvider extends ModelSubProvider {
                                         .build()
                                         .create(block, TextureMapping.cross(block), modelOutput)))
                                 .with(ROTATIONS_COLUMN_WITH_FACING));
+        var model = ModelTemplates.FLAT_ITEM.create(quartz.asItem(), TextureMapping.layer0(quartz.block()),
+                itemModels.modelOutput);
+        itemModels.itemModelOutput.accept(quartz.asItem(), ItemModelUtils.plainModel(model));
     }
 }
