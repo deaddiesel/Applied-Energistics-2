@@ -91,6 +91,11 @@ public class MatterCannonAmmo implements Recipe<RecipeInput> {
         this.weight = weight;
     }
 
+    @Override
+    public boolean isSpecial() {
+        return true;
+    }
+
     public static void ammo(RecipeOutput consumer, Identifier id, ItemLike item, float weight) {
         consumer.accept(ResourceKey.create(Registries.RECIPE, id), new MatterCannonAmmo(Ingredient.of(item), weight),
                 null);

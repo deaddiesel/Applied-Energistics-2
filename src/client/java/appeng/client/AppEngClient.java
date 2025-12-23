@@ -68,6 +68,7 @@ import net.neoforged.neoforge.client.event.RegisterItemModelsEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleGroupsEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.client.event.RegisterPictureInPictureRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterRangeSelectItemModelPropertyEvent;
 import net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
@@ -110,6 +111,7 @@ import appeng.client.guidebook.ConfigValueTagExtension;
 import appeng.client.guidebook.PartAnnotationStrategy;
 import appeng.client.hooks.BlockAttackHook;
 import appeng.client.hooks.RenderBlockOutlineHook;
+import appeng.client.integrations.itemlists.FluidBlockPictureInPictureRenderer;
 import appeng.client.item.ColorApplicatorItemModel;
 import appeng.client.item.EnergyFillLevelProperty;
 import appeng.client.item.PortableCellColorTintSource;
@@ -290,6 +292,7 @@ public class AppEngClient extends AppEngBase {
         modEventBus.addListener(this::registerEnvironmentalEffectRenderers);
         modEventBus.addListener(this::registerItemTintSources);
         modEventBus.addListener(this::registerBlockColors);
+        modEventBus.addListener(this::registerPipRenderers);
 
         RenderBlockOutlineHook.install();
 
@@ -660,5 +663,9 @@ public class AppEngClient extends AppEngBase {
         recipeMap = event.getRecipeMap();
         knownRecipeTypes.clear();
         knownRecipeTypes.addAll(event.getRecipeTypes());
+    }
+
+    private void registerPipRenderers(RegisterPictureInPictureRenderersEvent event) {
+        event.register(FluidBlockPictureInPictureRenderer.State.class, FluidBlockPictureInPictureRenderer::new);
     }
 }

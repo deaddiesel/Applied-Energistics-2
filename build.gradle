@@ -97,6 +97,10 @@ dependencies {
         case "rei":
             localRuntimeOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${project.rei_version}"
             break
+        case "jei":
+            clientCompileOnly "mezz.jei:jei-${project.jei_minecraft_version}-neoforge-api:${project.jei_version}"
+            localRuntimeOnly "mezz.jei:jei-${project.jei_minecraft_version}-neoforge:${project.jei_version}"
+            break
     }
 
     switch (project.runtime_tooltip_mod) {
@@ -228,8 +232,8 @@ final generateModMetadata = tasks.register('generateModMetadata', ProcessResourc
             'version',
             'minecraft_version',
             'neoforge_version_range',
-            'top_version_range',
             'jade_version_range',
+            'jei_version',
             'guideme_version'
     ].collectEntries { [it, project[it]] }
 

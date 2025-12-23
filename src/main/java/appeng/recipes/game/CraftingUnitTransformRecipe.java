@@ -55,6 +55,11 @@ public class CraftingUnitTransformRecipe implements Recipe<RecipeInput> {
         this.upgradeItem = upgradeItem;
     }
 
+    @Override
+    public boolean isSpecial() {
+        return true;
+    }
+
     public Block getUpgradedBlock() {
         return this.upgradedBlock;
     }

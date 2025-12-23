@@ -69,7 +69,6 @@ public final class Blitter {
     private Rect2i destRect = new Rect2i(0, 0, 0, 0);
     private boolean blending = true;
     private TextureTransform transform = TextureTransform.NONE;
-    private int zOffset;
 
     Blitter(Identifier texture, int referenceWidth, int referenceHeight) {
         this.texture = texture;
@@ -126,10 +125,7 @@ public final class Blitter {
     }
 
     public static Blitter icon(Icon icon) {
-        Identifier TEXTURE = AppEng.makeId("textures/guis/states.png");
-        int TEXTURE_WIDTH = 256;
-        int TEXTURE_HEIGHT = 256;
-        return Blitter.texture(TEXTURE, TEXTURE_WIDTH, TEXTURE_HEIGHT)
+        return Blitter.texture(Icon.TEXTURE, Icon.TEXTURE_WIDTH, Icon.TEXTURE_HEIGHT)
                 .src(icon.x, icon.y, icon.width, icon.height);
     }
 
@@ -268,11 +264,6 @@ public final class Blitter {
         float b = (packedRgb & 255) / 255.0F;
 
         return color(r, g, b);
-    }
-
-    public Blitter zOffset(int offset) {
-        this.zOffset = offset;
-        return this;
     }
 
     public void blit(GuiGraphics guiGraphics) {

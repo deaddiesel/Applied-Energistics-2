@@ -52,6 +52,11 @@ public class StorageCellDisassemblyRecipe implements Recipe<SingleRecipeInput> {
         this.disassemblyItems = disassemblyItems;
     }
 
+    @Override
+    public boolean isSpecial() {
+        return true;
+    }
+
     public Item getStorageCell() {
         return this.storageCell;
     }

@@ -182,7 +182,7 @@ public final class P2PTunnelAttunement {
             Item tunnelType,
             Component component) {
         public boolean hasApi(ItemStack stack) {
-            return capabilityTest != null && capabilityTest.test(stack);
+            return !stack.isEmpty() && capabilityTest != null && capabilityTest.test(stack);
         }
     }
 }

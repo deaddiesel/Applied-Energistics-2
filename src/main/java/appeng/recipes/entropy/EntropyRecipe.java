@@ -36,7 +36,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.Recipe;
@@ -54,7 +53,6 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
 
-import appeng.core.AppEng;
 import appeng.items.tools.powered.EntropyManipulatorItem;
 import appeng.recipes.AERecipeTypes;
 
@@ -77,9 +75,6 @@ public class EntropyRecipe implements Recipe<RecipeInput> {
             EntropyRecipe::getOutput,
             EntropyRecipe::new);
 
-    @Deprecated(forRemoval = true, since = "1.21.1")
-    public static final Identifier TYPE_ID = AppEng.makeId("entropy");
-
     private final EntropyMode mode;
     private final Input input;
     private final Output output;
@@ -88,6 +83,11 @@ public class EntropyRecipe implements Recipe<RecipeInput> {
         this.mode = mode;
         this.input = input;
         this.output = output;
+    }
+
+    @Override
+    public boolean isSpecial() {
+        return true;
     }
 
     @Override

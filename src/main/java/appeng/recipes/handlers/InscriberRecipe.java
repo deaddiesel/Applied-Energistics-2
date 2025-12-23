@@ -29,7 +29,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.PlacementInfo;
@@ -44,7 +43,6 @@ import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
 
-import appeng.core.AppEng;
 import appeng.core.definitions.AEBlocks;
 import appeng.recipes.AERecipeTypes;
 
@@ -77,12 +75,6 @@ public class InscriberRecipe implements Recipe<RecipeInput> {
             NeoForgeStreamCodecs.enumCodec(InscriberProcessType.class),
             InscriberRecipe::getProcessType,
             InscriberRecipe::new);
-
-    @Deprecated(forRemoval = true, since = "1.21.1")
-    public static final Identifier TYPE_ID = AppEng.makeId("inscriber");
-
-    @Deprecated(forRemoval = true, since = "1.21.1")
-    public static final RecipeType<InscriberRecipe> TYPE = AERecipeTypes.INSCRIBER;
 
     private final Ingredient middleInput;
     private final Optional<Ingredient> topOptional;
@@ -124,7 +116,7 @@ public class InscriberRecipe implements Recipe<RecipeInput> {
 
     @Override
     public RecipeType<InscriberRecipe> getType() {
-        return TYPE;
+        return AERecipeTypes.INSCRIBER;
     }
 
     @Override
