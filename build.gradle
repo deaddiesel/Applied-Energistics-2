@@ -89,7 +89,6 @@ dependencies {
     compileOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${project.rei_version}"
     compileOnly "mcp.mobius.waila:wthit-api:neo-${project.wthit_version}"
     compileOnly "curse.maven:jade-324717:${project.jade_file_id}"
-    compileOnly "mcjty.theoneprobe:theoneprobe:${project.top_version}"
 
     switch (project.runtime_itemlist_mod) {
         case "emi":
@@ -106,9 +105,6 @@ dependencies {
             break
         case "jade":
             localRuntimeOnly "curse.maven:jade-324717:${project.jade_file_id}"
-            break
-        case "top":
-            localRuntimeOnly "mcjty.theoneprobe:theoneprobe:${project.top_version}"
             break
     }
 
