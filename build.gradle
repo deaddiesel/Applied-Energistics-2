@@ -277,12 +277,6 @@ tasks.register('apiJar', Jar) {
     publicApiIncludePatterns(it)
 }
 
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-    archives apiJar
-}
-
 //////////////////
 // Maven publish
 publishing {
