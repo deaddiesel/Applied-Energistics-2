@@ -26,9 +26,9 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.gui.builder.IClickableIngredientFactory;
 import mezz.jei.api.gui.handlers.IGuiClickableArea;
 import mezz.jei.api.gui.handlers.IGuiContainerHandler;
-import mezz.jei.api.ingredients.ITypedIngredient;
 import mezz.jei.api.recipe.types.IRecipeType;
 import mezz.jei.api.registration.IAdvancedRegistration;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
@@ -46,7 +46,6 @@ import appeng.api.ids.AEComponents;
 import appeng.client.AppEngClient;
 import appeng.client.api.integrations.jei.IngredientConverters;
 import appeng.client.gui.AEBaseScreen;
-import appeng.client.gui.StackWithBounds;
 import appeng.client.gui.implementations.InscriberScreen;
 import appeng.client.integrations.jei.transfer.EncodePatternTransferHandler;
 import appeng.client.integrations.jei.transfer.UseCraftingRecipeTransfer;
@@ -229,13 +228,20 @@ public class JEIPlugin implements IModPlugin {
                     }
 
                     @Override
-                    public Optional<IClickableIngredient<?>> getClickableIngredientUnderMouse(AEBaseScreen<?> screen,
-                            double mouseX, double mouseY) {
+                    public Optional<? extends IClickableIngredient<?>> getClickableIngredientUnderMouse(
+                            IClickableIngredientFactory builder, AEBaseScreen<?> screen, double mouseX, double mouseY) {
                         // The following code allows the player to show recipes involving fluids in AE fluid terminals
                         // or AE fluid tanks shown in fluid interfaces and other UI.
                         var stackWithBounds = screen.getStackUnderMouse(mouseX, mouseY);
                         if (stackWithBounds != null) {
-                            return makeClickableIngredient(stackWithBounds);
+                            var ingredient = GenericEntryStackHelper.stackToIngredient(
+                                    jeiRuntime.getIngredientManager(),
+                                    stackWithBounds.stack());
+                            if (ingredient == null) {
+                                return Optional.empty();
+                            }
+
+                            return builder.createBuilder(ingredient).buildWithArea(stackWithBounds.bounds());
                         }
 
                         return Optional.empty();
@@ -254,29 +260,6 @@ public class JEIPlugin implements IModPlugin {
                 });
 
         registration.addGhostIngredientHandler(AEBaseScreen.class, new GhostIngredientHandler());
-    }
-
-    private Optional<IClickableIngredient<?>> makeClickableIngredient(StackWithBounds stackWithBounds) {
-        var ingredient = GenericEntryStackHelper.stackToIngredient(jeiRuntime.getIngredientManager(),
-                stackWithBounds.stack());
-        if (ingredient == null) {
-            return Optional.empty();
-        }
-
-        return Optional.of(new ClickableIngredient<>(ingredient, stackWithBounds.bounds()));
-    }
-
-    private record ClickableIngredient<T>(ITypedIngredient<T> ingredient,
-            Rect2i area) implements IClickableIngredient<T> {
-        @Override
-        public ITypedIngredient<T> getTypedIngredient() {
-            return ingredient;
-        }
-
-        @Override
-        public Rect2i getArea() {
-            return area;
-        }
     }
 
     @Override

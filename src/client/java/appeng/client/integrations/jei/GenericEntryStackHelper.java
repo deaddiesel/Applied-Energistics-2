@@ -63,7 +63,7 @@ public final class GenericEntryStackHelper {
             IngredientConverter<T> converter, GenericStack stack) {
         var ingredient = converter.getIngredientFromStack(stack);
         if (ingredient != null) {
-            return manager.createTypedIngredient(converter.getIngredientType(), ingredient).orElse(null);
+            return manager.createTypedIngredient(converter.getIngredientType(), ingredient, false).orElse(null);
         } else {
             return null;
         }

@@ -163,7 +163,7 @@ public class CertusGrowthCategory extends ViewBasedCategory<CertusGrowthCategory
                     }
                     builder.addSlot(RecipeIngredientRole.OUTPUT, centerX + 40 - 18, 25)
                             .setBackground(slotBackground, -1, -1)
-                            .addItemStack(finalResult);
+                            .add(finalResult);
                 }
             };
             /*
@@ -249,11 +249,11 @@ public class CertusGrowthCategory extends ViewBasedCategory<CertusGrowthCategory
 
                     builder.addSlot(RecipeIngredientRole.INPUT, 1, 22)
                             .setBackground(slotBackground, -1, -1)
-                            .addItemStack(AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED.stack());
+                            .add(AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED.stack());
 
                     builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, 1, 43)
                             .setBackground(slotBackground, -1, -1)
-                            .addItemStack(AEItems.METEORITE_COMPASS.stack());
+                            .add(AEItems.METEORITE_COMPASS.stack());
                 }
             };
             /*
@@ -272,11 +272,11 @@ public class CertusGrowthCategory extends ViewBasedCategory<CertusGrowthCategory
                 public void buildSlots(IRecipeLayoutBuilder builder) {
                     builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, 1, 13)
                             .setBackground(slotBackground, -1, -1)
-                            .addItemStack(AEBlocks.FLAWLESS_BUDDING_QUARTZ.stack());
+                            .add(AEBlocks.FLAWLESS_BUDDING_QUARTZ.stack());
 
                     builder.addSlot(RecipeIngredientRole.INPUT, 1, 33)
                             .setBackground(slotBackground, -1, -1)
-                            .addItemStack(AEItems.METEORITE_COMPASS.stack());
+                            .add(AEItems.METEORITE_COMPASS.stack());
                 }
             };
             /*
@@ -302,7 +302,7 @@ public class CertusGrowthCategory extends ViewBasedCategory<CertusGrowthCategory
 
                     builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, centerX + 8, 40)
                             .setBackground(slotBackground, -1, -1)
-                            .addItemStack(AEBlocks.GROWTH_ACCELERATOR.stack());
+                            .add(AEBlocks.GROWTH_ACCELERATOR.stack());
                 }
             };
         };
