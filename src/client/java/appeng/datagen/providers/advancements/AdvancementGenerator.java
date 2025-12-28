@@ -74,7 +74,7 @@ public class AdvancementGenerator implements AdvancementSubProvider {
                         localization.component("achievement.ae2.Root", "Applied Energistics"),
                         localization.component("achievement.ae2.Root.desc",
                                 "When a chest is simply not enough. Acquire Copper to start your AE2 adventure."),
-                        AppEng.makeId("textures/block/sky_stone_brick.png"),
+                        AppEng.makeId("block/sky_stone_brick"),
                         AdvancementType.TASK,
                         false /* showToast */,
                         false /* announceChat */,

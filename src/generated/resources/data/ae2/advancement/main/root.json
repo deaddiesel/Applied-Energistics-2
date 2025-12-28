@@ -13,7 +13,7 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "ae2:textures/block/sky_stone_brick.png",
+    "background": "ae2:block/sky_stone_brick",
     "description": {
       "translate": "achievement.ae2.Root.desc"
     },
