@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.Nullable;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -29,6 +32,8 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IClickableIngredientFactory;
 import mezz.jei.api.gui.handlers.IGuiClickableArea;
 import mezz.jei.api.gui.handlers.IGuiContainerHandler;
+import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
+import mezz.jei.api.ingredients.subtypes.UidContext;
 import mezz.jei.api.recipe.types.IRecipeType;
 import mezz.jei.api.registration.IAdvancedRegistration;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
@@ -83,9 +88,64 @@ public class JEIPlugin implements IModPlugin {
         return ID;
     }
 
+    private static ISubtypeInterpreter<ItemStack> subTypeInterpreterForIngredientList(DataComponentType<?>... types) {
+        return (ingredient, context) -> {
+            if (context == UidContext.Recipe) {
+                return null;
+            }
+            if (types.length == 1) {
+                return ingredient.get(types[0]);
+            } else {
+                var result = new ArrayList<@Nullable Object>(types.length);
+                for (var type : types) {
+                    result.add(ingredient.get(type));
+                }
+                return result;
+            }
+        };
+    }
+
     @Override
     public void registerItemSubtypes(ISubtypeRegistration subtypeRegistry) {
         subtypeRegistry.registerFromDataComponentTypes(AEItems.FACADE.asItem(), AEComponents.FACADE_ITEM);
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.COLOR_APPLICATOR.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.CHARGED_STAFF.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.MATTER_CANNON.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.ENTROPY_MANIPULATOR.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.WIRELESS_TERMINAL.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.WIRELESS_CRAFTING_TERMINAL.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEBlocks.ENERGY_CELL.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEBlocks.DENSE_ENERGY_CELL.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEParts.ANNIHILATION_PLANE.asItem(),
+                subTypeInterpreterForIngredientList(DataComponents.ENCHANTMENTS));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.PORTABLE_ITEM_CELL1K.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.PORTABLE_ITEM_CELL4K.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.PORTABLE_ITEM_CELL16K.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.PORTABLE_ITEM_CELL64K.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.PORTABLE_ITEM_CELL256K.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.PORTABLE_FLUID_CELL1K.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.PORTABLE_FLUID_CELL4K.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.PORTABLE_FLUID_CELL16K.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.PORTABLE_FLUID_CELL64K.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
+        subtypeRegistry.registerSubtypeInterpreter(AEItems.PORTABLE_FLUID_CELL256K.asItem(),
+                subTypeInterpreterForIngredientList(AEComponents.STORED_ENERGY));
     }
 
     @Override
