@@ -299,7 +299,6 @@ public class AppEngClient extends AppEngBase {
         var areaOverlayRenderer = new AreaOverlayRenderer();
         NeoForge.EVENT_BUS.register(areaOverlayRenderer);
 
-        modEventBus.addListener(this::registerReloadListener);
         modEventBus.addListener(this::registerPartRenderers);
         modEventBus.addListener(this::registerPartModelTypes);
         modEventBus.addListener(this::initCustomClientRegistries);
@@ -379,10 +378,14 @@ public class AppEngClient extends AppEngBase {
     }
 
     private void registerReloadListeners(AddClientReloadListenersEvent event) {
+        event.addListener(PartRendererDispatcher.ID, partRendererDispatcher);
+        // The block entity render for parts needs access to the formed PartRendererDispatcher
+        event.addDependency(VanillaClientListeners.BLOCK_ENTITY_RENDERER, PartRendererDispatcher.ID);
+
         event.addListener(AppEng.makeId("styles"), StyleManager.getReloadListener());
     }
 
-    private void wheelEvent(final InputEvent.MouseScrollingEvent me) {
+    private void wheelEvent(InputEvent.MouseScrollingEvent me) {
         if (me.getScrollDeltaY() == 0) {
             return;
         }
@@ -545,12 +548,6 @@ public class AppEngClient extends AppEngBase {
 
     public PartRendererDispatcher getPartRendererDispatcher() {
         return partRendererDispatcher;
-    }
-
-    private void registerReloadListener(AddClientReloadListenersEvent event) {
-        event.addListener(PartRendererDispatcher.ID, partRendererDispatcher);
-        // The block entity render for parts needs access to the formed PartRendererDispatcher
-        event.addDependency(VanillaClientListeners.BLOCK_ENTITY_RENDERER, PartRendererDispatcher.ID);
     }
 
     private void registerRenderPipelines(RegisterRenderPipelinesEvent event) {

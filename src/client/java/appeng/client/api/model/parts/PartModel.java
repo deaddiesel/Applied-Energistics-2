@@ -22,7 +22,8 @@ public interface PartModel {
      *
      * @param level         The level the part host is in.
      * @param pos           The position the part host is located at.
-     * @param partModelData Any part model state previously collected from {@link IPart#getModelData()}.
+     * @param partModelData Any part model state previously collected from
+     *                      {@link IPart#collectModelData(ModelData.Builder)}.
      */
     void collectParts(BlockAndTintGetter level,
             BlockPos pos,
