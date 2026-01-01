@@ -83,7 +83,7 @@ jobs:
       - id: versions
         name: Determine Game and Mod-Version
         run: |
-          GAME_VERSION=$(jq -r .gameVersion 'build/guide/index.json')
+          GAME_VERSION=$(jq -r .gameMajorVersion 'build/guide/index.json')
           echo "Game-Version: $GAME_VERSION"
           
           echo "GAME_VERSION=$GAME_VERSION" >> "$GITHUB_OUTPUT"
